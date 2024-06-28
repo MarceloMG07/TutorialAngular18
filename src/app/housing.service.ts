@@ -5,52 +5,17 @@ import { HousingLocation } from './housinglocation';
   providedIn: 'root'
 })
 export class HousingService {
-  housingLocationList: HousingLocation[] = [
-
-    {
-      id: 1,
-      name: "Teste",
-      photo: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/3.svg",
-      city: "cidade",
-      state: "BR",
-      availableUnits: 0,
-      wifi: false,
-      laundry: false
-    },
-    {
-      id: 2,
-      name: "Teste",
-      photo: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/5.svg",
-      city: "cidade",
-      state: "BR",
-      availableUnits: 0,
-      wifi: false,
-      laundry: false
-    },
-    {
-      id: 3,
-      name: "Teste",
-      photo: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/9.svg",
-      city: "cidade",
-      state: "BR",
-      availableUnits: 0,
-      wifi: false,
-      laundry: false
-    }
-  ];
-
-  constructor() { }
-
-  getAllHousingLocations(): HousingLocation[] {
-    return this.housingLocationList;
+  url = 'http://localhost:3000/locations';
+  async getAllHousingLocations(): Promise<HousingLocation[]> {
+    const data = await fetch(this.url);
+    return (await data.json()) ?? [];
   }
-  getHousingLocationById(id: number): HousingLocation | undefined {
-    return this.housingLocationList.find((housingLocation) => housingLocation.id === id);
+  async getHousingLocationById(id: number): Promise<HousingLocation | undefined> {
+    const data = await fetch(`${this.url}/${id}`);
+    return (await data.json()) ?? {};
   }
-
   submitApplication(firstName: string, lastName: string, email: string) {
-    console.log(
-      `Homes application received: firstName: ${firstName}, lastName: ${lastName}, email: ${email}.`,
-    );
+    // tslint:disable-next-line
+    console.log(firstName, lastName, email);
   }
 }
