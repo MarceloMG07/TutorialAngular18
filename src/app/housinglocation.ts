@@ -1,7 +1,10 @@
 export interface HousingLocation {
-    albumId: number;
     id: number;
-    title: string;
-    url: string;
-    thumbnailUrl: string;
-}
+    name: string;
+    city: string;
+    state: string;
+    photo: string;
+    availableUnits: number;
+    wifi: boolean;
+    laundry: boolean;
+  }
